@@ -27,7 +27,10 @@ public class TransparentPixel extends AbstractPixel
 	TransparentPixel(int[] rgba)
 	{
 		// complÃ©ter
+		//Allouer l'espace mémoire du tableau
 		this.rgba = new int[4];
+		
+		//Insérer les attrbuts dans le tableau
 		this.rgba[0] = rgba[0];
 		this.rgba[1] = rgba[1];
 		this.rgba[2] = rgba[2];
@@ -40,8 +43,11 @@ public class TransparentPixel extends AbstractPixel
 	public BWPixel toBWPixel()
 	{
 		// complÃ©ter
+		
+		//Caluler la moyenne
 		int moyenne = (rgba[0] + rgba[1] + rgba[2]) / 3;
 		
+		//Conversion vers BW
 		if(moyenne <= 127)
 			return new BWPixel(false);
 		else
@@ -54,8 +60,10 @@ public class TransparentPixel extends AbstractPixel
 	public GrayPixel toGrayPixel()
 	{
 		// complÃ©ter
+		//Calculer la moyenne
 		int moyenne = (rgba[0] + rgba[1] + rgba[2]) / 3;
 		
+		//Conversion vers GrayPixel
 		return new GrayPixel(moyenne);
 	}
 	
@@ -65,8 +73,10 @@ public class TransparentPixel extends AbstractPixel
 	public ColorPixel toColorPixel()
 	{
 		// complÃ©ter
+		//Création du tableau pour créer un pixel Color
 		int rgb[] = {rgba[0], rgba[1], rgba[2]};
 		
+		//Création du pixel Color
 		return new ColorPixel(rgb);
 	}
 	
@@ -76,14 +86,17 @@ public class TransparentPixel extends AbstractPixel
 	public TransparentPixel Negative()
 	{
 		// complÃ©ter
+		//Transformation vers négatif
 		int rgba_negative[] = {rgba[0] - 255, rgba[1] - 255, rgba[2] - 255, rgba[3]};
 		
+		//Création du pixel négatif
 		return new TransparentPixel(rgba_negative);
 	}
 	
 	public TransparentPixel toTransparentPixel()
 	{
 		// complÃ©ter
+		//Retourner un nouveau pixel identique à l'objet courant
 		return new TransparentPixel(rgba);
 	}
 	

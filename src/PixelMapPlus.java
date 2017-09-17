@@ -57,7 +57,10 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void negate()
 	{
 		// complï¿½ter
-		
+		//Transformer tous les pixels en négatif
+		for(int i = 0 ; i < super.width ; i++)
+			for(int j = 0 ; j < super.height ; j++)
+				super.imageData[i][j] = super.imageData[i][j].Negative();
 	}
 	
 	/**
@@ -66,6 +69,17 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToBWImage()
 	{
 		// complï¿½ter
+		//Vérifier si l'image est déjà au bon format
+		if(super.imageType == ImageType.BW)
+			return;
+			
+		//Transformer tous les pixels au nouveau format
+		for(int i = 0 ; i < super.width ; i++)
+			for(int j = 0 ; j < super.height ; j++)
+				super.imageData[i][j] = super.imageData[i][j].toBWPixel();
+		
+		//Changer le format de l'image
+		super.imageType = ImageType.BW;
 		
 	}
 	
@@ -75,6 +89,17 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToGrayImage()
 	{
 		// complï¿½ter
+		//Vérifier si l'image est déjà au bon format
+		if(super.imageType == ImageType.Gray)
+			return;
+		
+		//Transformer tous les pixels au nouveau format
+		for(int i = 0 ; i < super.width ; i++)
+			for(int j = 0 ; j < super.height ; j++)
+				super.imageData[i][j] = super.imageData[i][j].toGrayPixel();
+		
+		//Changer le format de l'image
+		super.imageType = ImageType.Gray;
 		
 	}
 	
@@ -84,12 +109,34 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToColorImage()
 	{
 		// complï¿½ter
+		//Vérifier si l'image est déjà au bon format
+		if(super.imageType == ImageType.Color)
+			return;
+		
+		//Transformer tous les pixels au nouveau format
+		for(int i = 0 ; i < super.width ; i++)
+			for(int j = 0 ; j < super.height ; j++)
+				super.imageData[i][j] = super.imageData[i][j].toColorPixel();
+		
+		//Changer le format de l'image
+		super.imageType = ImageType.Color;
 		
 	}
 	
 	public void convertToTransparentImage()
 	{
 		// complï¿½ter
+		//Vérifier si l'image est déjà au bon format
+		if(super.imageType == ImageType.Transparent)
+			return;
+		
+		//Transformer tous les pixels au nouveau format
+		for(int i = 0 ; i < super.width ; i++)
+			for(int j = 0 ; j < super.height ; j++)
+				super.imageData[i][j] = super.imageData[i][j].toTransparentPixel();
+		
+		//Changer le format de l'image
+		super.imageType = ImageType.Transparent;
 		
 	}
 	
@@ -117,7 +164,20 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			throw new IllegalArgumentException();
 		
 		// complï¿½ter
+		float ratioHauteur = h/super.height;
+		float ratioLargeur = w/super.width;
 		
+		AbstractPixel[][] tempo = new AbstractPixel[w][h];
+		
+		for(int i = 0; i<w;i++)
+			for(int j = 0; j<h; j++)
+				tempo[i][j] = super.imageData[Math.round(i/ratioHauteur)][Math.round(j/ratioLargeur)];
+	
+		
+		
+		super.imageData = tempo; 
+		super.height = h;
+		super.width = w; 
 	}
 	
 	/**

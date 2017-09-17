@@ -115,8 +115,10 @@ public class PixelMap
 		width = w;
 		
 		// complï¿½ter
+		//Allocation de l'espace mémoire pour stocker les pixels de l'image
 		imageData = new AbstractPixel[height][width];
 		
+		//Transformer chacun des pixels créés par défaut en pixels blanc
 		for(int i = 0 ; i < height ; i++)
 			for(int j = 0 ; j < width ; j++)
 				imageData[i][j] = new BWPixel(false);
@@ -128,7 +130,10 @@ public class PixelMap
 	public void clearData()
 	{
 		// complï¿½ter
+		//Supprimer le pointeur vers le tableau de pixels inutilisé
 		imageData = null;
+		
+		//Mettre à jour les variables concernant la taille de l'image
 		height = 0;
 		width = 0;
 	}

@@ -23,8 +23,8 @@ public class GrayPixel  extends AbstractPixel
 	GrayPixel(int pixel)
 	{
 		// complÃ©ter
+		//Modifie l'attribut du GrayPixel par celui en paramètre
 		this.pixel = pixel;
-		
 	}
 	
 	/**
@@ -50,9 +50,12 @@ public class GrayPixel  extends AbstractPixel
 	public BWPixel toBWPixel()
 	{
 		// complÃ©ter
+		//Logique de transformation vers le PixelBW
 		if(pixel <= 127)
 			return new BWPixel(false);
-		else return new BWPixel(true);
+		else
+			//pixel > 127
+			return new BWPixel(true);
 		
 	}
 	
@@ -62,6 +65,7 @@ public class GrayPixel  extends AbstractPixel
 	public GrayPixel toGrayPixel()
 	{
 		// complÃ©ter
+		//Retourne une copie identique à l'objet courant
 		return new GrayPixel(pixel);
 		
 	}
@@ -72,6 +76,7 @@ public class GrayPixel  extends AbstractPixel
 	public ColorPixel toColorPixel()
 	{
 		// complÃ©ter
+		//Création du tableau pour la création d'un ColorPixel
 		int rgb[] = {pixel, pixel, pixel};
 		return new ColorPixel(rgb);
 	}
@@ -79,6 +84,7 @@ public class GrayPixel  extends AbstractPixel
 	public TransparentPixel toTransparentPixel()
 	{
 		// complÃ©ter
+		//Création du tableau pour la création d'un TransparentPixel
 		int rgba[] = {pixel, pixel, pixel, 255};
 		return new TransparentPixel(rgba);
 		

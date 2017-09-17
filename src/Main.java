@@ -33,6 +33,9 @@ public class Main
 		wName = "Edsger Dijkstra (Transparent)";
 		new DisplayImageWindow(wName, pmt, 200, 200);
 
+		PixelMapPlus hpmp = new PixelMapPlus("./src/ed.ppm");
+		hpmp.resize(hpmp.width/2, hpmp.height/2);
+		new DisplayImageWindow(wName, hpmp);
 		/**
 		 * Exercice 2
 		 */
