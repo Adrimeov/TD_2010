@@ -23,6 +23,7 @@ public class GrayPixel  extends AbstractPixel
 	GrayPixel(int pixel)
 	{
 		// compléter
+		this.pixel = pixel;
 		
 	}
 	
@@ -49,6 +50,9 @@ public class GrayPixel  extends AbstractPixel
 	public BWPixel toBWPixel()
 	{
 		// compléter
+		if(pixel <= 127)
+			return new BWPixel(false);
+		else return new BWPixel(true);
 		
 	}
 	
@@ -58,6 +62,7 @@ public class GrayPixel  extends AbstractPixel
 	public GrayPixel toGrayPixel()
 	{
 		// compléter
+		return new GrayPixel(pixel);
 		
 	}
 	
@@ -67,12 +72,15 @@ public class GrayPixel  extends AbstractPixel
 	public ColorPixel toColorPixel()
 	{
 		// compléter
-		
+		int rgb[] = {pixel, pixel, pixel};
+		return new ColorPixel(rgb);
 	}
 	
 	public TransparentPixel toTransparentPixel()
 	{
 		// compléter
+		int rgba[] = {pixel, pixel, pixel, 255};
+		return new TransparentPixel(rgba);
 		
 	}
 	
@@ -82,6 +90,7 @@ public class GrayPixel  extends AbstractPixel
 	public AbstractPixel Negative()
 	{
 		// compléter
+		return new GrayPixel(255 - pixel);
 	}
 	
 	public void setAlpha(int alpha)

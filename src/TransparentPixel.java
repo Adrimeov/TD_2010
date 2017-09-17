@@ -27,7 +27,10 @@ public class TransparentPixel extends AbstractPixel
 	TransparentPixel(int[] rgba)
 	{
 		// compléter
-		
+		this.rgba[0] = rgba[0];
+		this.rgba[1] = rgba[1];
+		this.rgba[2] = rgba[2];
+		this.rgba[3] = rgba[3];
 	}
 	
 	/**
@@ -36,7 +39,12 @@ public class TransparentPixel extends AbstractPixel
 	public BWPixel toBWPixel()
 	{
 		// compléter
+		int moyenne = (rgba[0] + rgba[1] + rgba[2]) / 3;
 		
+		if(moyenne <= 127)
+			return new BWPixel(false);
+		else
+			return new BWPixel(true);
 	}
 	
 	/**
@@ -45,7 +53,9 @@ public class TransparentPixel extends AbstractPixel
 	public GrayPixel toGrayPixel()
 	{
 		// compléter
+		int moyenne = (rgba[0] + rgba[1] + rgba[2]) / 3;
 		
+		return new GrayPixel(moyenne);
 	}
 	
 	/**
@@ -54,7 +64,9 @@ public class TransparentPixel extends AbstractPixel
 	public ColorPixel toColorPixel()
 	{
 		// compléter
+		int rgb[] = {rgba[0], rgba[1], rgba[2]};
 		
+		return new ColorPixel(rgb);
 	}
 	
 	/**
@@ -63,13 +75,15 @@ public class TransparentPixel extends AbstractPixel
 	public TransparentPixel Negative()
 	{
 		// compléter
+		int rgba_negative[] = {rgba[0] - 255, rgba[1] - 255, rgba[2] - 255, rgba[3]};
 		
+		return new TransparentPixel(rgba_negative);
 	}
 	
 	public TransparentPixel toTransparentPixel()
 	{
 		// compléter
-		
+		return new TransparentPixel(rgba);
 	}
 	
 	public void setAlpha(int alpha)
