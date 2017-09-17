@@ -57,7 +57,8 @@ public class ColorPixel extends AbstractPixel
 	public ColorPixel toColorPixel()
 	{
 		// compléter
-		
+		ColorPixel bob = new ColorPixel(); 
+		return bob; 
 	}
 	
 	public TransparentPixel toTransparentPixel()
