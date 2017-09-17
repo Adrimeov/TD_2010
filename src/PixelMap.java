@@ -115,8 +115,11 @@ public class PixelMap
 		width = w;
 		
 		// compl�ter
+		imageData = new AbstractPixel[height][width];
 		
-		
+		for(int i = 0 ; i < height ; i++)
+			for(int j = 0 ; j < width ; j++)
+				imageData[i][j] = new BWPixel(false);
 	}
 	
 	/**
@@ -125,7 +128,9 @@ public class PixelMap
 	public void clearData()
 	{
 		// compl�ter
-		
+		imageData = null;
+		height = 0;
+		width = 0;
 	}
 	
 	/**

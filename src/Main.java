@@ -12,7 +12,7 @@ public class Main
 		 * Exercice 1
 		 */
 
-		PixelMap pmc = new PixelMap("./src/ed.ppm");
+		PixelMap pmc = new PixelMap("src/ed.ppm");
 		PixelMap pmg = pmc.toGrayImage();
 		PixelMap pmb = pmc.toBWImage();
 

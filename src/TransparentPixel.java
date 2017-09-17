@@ -27,6 +27,7 @@ public class TransparentPixel extends AbstractPixel
 	TransparentPixel(int[] rgba)
 	{
 		// compléter
+		this.rgba = new int[4];
 		this.rgba[0] = rgba[0];
 		this.rgba[1] = rgba[1];
 		this.rgba[2] = rgba[2];
