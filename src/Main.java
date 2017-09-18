@@ -37,6 +37,7 @@ public class Main
 		hpmp.resize(hpmp.width/2, hpmp.height/2);
 		PixelMapPlus grand = new PixelMapPlus("./src/ed.ppm");
 		grand.inset(hpmp, 400, 350);
+		grand.rotate(2, 2, 90);
 		
 		new DisplayImageWindow(wName, grand);
 		/**
