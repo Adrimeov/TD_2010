@@ -155,23 +155,26 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		PixelMap nouvelleImage = new PixelMap(super.imageType,super.height,super.width);
 		
 		double matrix1[][] = {{Math.cos(angleRadian),
-							-(Math.sin(angleRadian)),
-							-(Math.cos(angleRadian))*x+(Math.sin(angleRadian)*y+x)},
+							-1.0f*(Math.sin(angleRadian)),
+							-1.0f*(Math.cos(angleRadian))*(double)x+(Math.sin(angleRadian)*(double)y+(double)x)},
 							{Math.sin(angleRadian), 
 							Math.cos(angleRadian),
-							-(Math.sin(angleRadian))*(-x)+(Math.cos(angleRadian)*y+y)
+							-1.0f*(Math.sin(angleRadian))*(-1.0f*(double)x)+(Math.cos(angleRadian)*(double)y+(double)y)
 							}}; 
+		
+		
 		for(int i = 0; i<super.height; i++) {
 			for(int j = 0; j<super.width; j++) {
-				double matrix2[] = {i,j,1};
+				double matrix2[] = {i,j,1.0f};
 				
 				double[] nouvelleCoordonne = {0,0};
 				
 				for(int k = 0; k<2; k++)
 					for(int l = 0; l<3;l++)
 						nouvelleCoordonne[k] += matrix1[k][l] * matrix2[l];
-				if((int)nouvelleCoordonne[0]>=0 && (int)nouvelleCoordonne[0]<super.height && (int)nouvelleCoordonne[1]>=0 && (int)nouvelleCoordonne[1]<super.width );
-					nouvelleImage.imageData[(int)nouvelleCoordonne[0]][(int)nouvelleCoordonne[1]] = super.imageData[i][j];
+				
+				if((int)nouvelleCoordonne[0]>=0 && (int)nouvelleCoordonne[0]<super.height && (int)nouvelleCoordonne[1]>=0 && (int)nouvelleCoordonne[1]<super.width )
+					nouvelleImage.imageData[(int)(nouvelleCoordonne[0])][(int)(nouvelleCoordonne[1])] = super.imageData[i][j];
 				
 				
 			}

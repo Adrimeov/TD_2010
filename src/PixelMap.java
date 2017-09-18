@@ -121,7 +121,7 @@ public class PixelMap
 		//Transformer chacun des pixels créés par défaut en pixels blanc
 		for(int i = 0 ; i < height ; i++)
 			for(int j = 0 ; j < width ; j++)
-				imageData[i][j] = new BWPixel(false);
+				imageData[i][j] = new BWPixel(true);
 	}
 	
 	/**
