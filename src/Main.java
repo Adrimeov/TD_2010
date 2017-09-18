@@ -22,20 +22,23 @@ public class Main
 				pmt.getPixel(i, j).setAlpha(127);
 
 		String wName = "Edsger Dijkstra (original)";
-		new DisplayImageWindow(wName, pmc, 50, 50);
+		//new DisplayImageWindow(wName, pmc, 50, 50);
 
 		wName = "Edsger Dijkstra (gris)";
-		new DisplayImageWindow(wName, pmg, 50+50, 50+50);
+		//new DisplayImageWindow(wName, pmg, 50+50, 50+50);
 
 		wName = "Edsger Dijkstra (B&W)";
-		new DisplayImageWindow(wName, pmb, 50+100, 50+100);
+		//new DisplayImageWindow(wName, pmb, 50+100, 50+100);
 
 		wName = "Edsger Dijkstra (Transparent)";
-		new DisplayImageWindow(wName, pmt, 200, 200);
+		//new DisplayImageWindow(wName, pmt, 200, 200);
 
 		PixelMapPlus hpmp = new PixelMapPlus("./src/ed.ppm");
 		hpmp.resize(hpmp.width/2, hpmp.height/2);
-		new DisplayImageWindow(wName, hpmp);
+		PixelMapPlus grand = new PixelMapPlus("./src/ed.ppm");
+		grand.inset(hpmp, 400, 350);
+		
+		new DisplayImageWindow(wName, grand);
 		/**
 		 * Exercice 2
 		 */

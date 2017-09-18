@@ -187,7 +187,10 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void inset(PixelMap pm, int row0, int col0)
 	{
 		// compl�ter
-		
+		for(int i = row0; i < pm.height + row0 ; i++)
+			for(int j = col0; j < pm.width + col0 ; j++)
+				if(i >= 0 && i < this.height && j >= 0 && j < this.width)
+					this.imageData[i][j] = pm.imageData[i - row0][j - col0];
 	}
 	
 	/**
