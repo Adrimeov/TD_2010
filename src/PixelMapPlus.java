@@ -57,7 +57,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void negate()
 	{
 		// complï¿½ter
-		//Transformer tous les pixels en négatif
+		//Transformer tous les pixels en nï¿½gatif
 		for(int i = 0 ; i < super.width ; i++)
 			for(int j = 0 ; j < super.height ; j++)
 				super.imageData[i][j] = super.imageData[i][j].Negative();
@@ -69,7 +69,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToBWImage()
 	{
 		// complï¿½ter
-		//Vérifier si l'image est déjà au bon format
+		//Vï¿½rifier si l'image est dï¿½jï¿½ au bon format
 		if(super.imageType == ImageType.BW)
 			return;
 			
@@ -89,7 +89,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToGrayImage()
 	{
 		// complï¿½ter
-		//Vérifier si l'image est déjà au bon format
+		//Vï¿½rifier si l'image est dï¿½jï¿½ au bon format
 		if(super.imageType == ImageType.Gray)
 			return;
 		
@@ -109,7 +109,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToColorImage()
 	{
 		// complï¿½ter
-		//Vérifier si l'image est déjà au bon format
+		//Vï¿½rifier si l'image est dï¿½jï¿½ au bon format
 		if(super.imageType == ImageType.Color)
 			return;
 		
@@ -126,7 +126,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToTransparentImage()
 	{
 		// complï¿½ter
-		//Vérifier si l'image est déjà au bon format
+		//Vï¿½rifier si l'image est dï¿½jï¿½ au bon format
 		if(super.imageType == ImageType.Transparent)
 			return;
 		
@@ -164,18 +164,19 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			throw new IllegalArgumentException();
 		
 		// complï¿½ter
-		float ratioHauteur = h/super.height;
-		float ratioLargeur = w/super.width;
+		float ratioHauteur = (float)h/(float)super.height;
+		float ratioLargeur = (float)w/(float)super.width;
 		
-		AbstractPixel[][] tempo = new AbstractPixel[w][h];
+		AbstractPixel[][] tempo = new AbstractPixel[h][w];
 		
-		for(int i = 0; i<w;i++)
-			for(int j = 0; j<h; j++)
-				tempo[i][j] = super.imageData[Math.round(i/ratioHauteur)][Math.round(j/ratioLargeur)];
+		for(int i = 0; i<h;i++)
+			for(int j = 0; j<w; j++)
+				tempo[i][j] = super.imageData[(int)(i/ratioHauteur)][(int)(j/ratioLargeur)];
 	
 		
 		
 		super.imageData = tempo; 
+		tempo = null; 
 		super.height = h;
 		super.width = w; 
 	}
