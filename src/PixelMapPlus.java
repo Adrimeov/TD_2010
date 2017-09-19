@@ -252,6 +252,50 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			throw new IllegalArgumentException();
 		
 		// complï¿½ter
+		//Calcul de la dimension de la partie agrandie
+		int hauteur = (int)(this.height / zoomFactor);
+		int largeur = (int)(this.width / zoomFactor);
+		
+		
+		//Recentrer le point choisi si image hors limite
+		if((x - hauteur/2) < 0)
+			x = hauteur / 2;
+		else if ((x + hauteur/2) >= this.height)
+			x = super.height - hauteur/2;
+		
+		if((y - largeur/2) < 0)
+			y = largeur / 2;
+		else if ((y + largeur/2) >= this.width)
+			y = super.width - largeur/2;
+		
+		//Extraire la portion à zoomer
+		int hauteurMin = x - hauteur / 2;
+		int hauteurMax = x + hauteur / 2;
+		int largeurMin = y - largeur / 2;
+		int largeurMax = y + largeur / 2;
+		int largeurEnCours = largeurMin;
+		int hauteurEnCours = hauteurMin; 
+		
+		PixelMap nouvelleImage = new PixelMap(super.imageType, hauteur, largeur);
+		
+
+		for(int i = 0 ; i < hauteur ; i++) {
+			for(int j = 0 ; j < largeur; j++) {
+				nouvelleImage.imageData[i][j] = super.imageData[hauteurEnCours][largeurEnCours];
+				largeurEnCours++;
+			}
+			hauteurEnCours++;
+			largeurEnCours = largeurMin;
+		}
+		
+		super.imageData = nouvelleImage.imageData;
+		
+		int hauteurOriginal = super.height;
+		int largeurOriginal = super.width;
+		super.height = hauteur;
+		super.width = largeur;
+		
+		this.resize(largeurOriginal, hauteurOriginal);
 		
 	}
 

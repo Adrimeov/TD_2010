@@ -34,10 +34,11 @@ public class Main
 		//new DisplayImageWindow(wName, pmt, 200, 200);
 
 		PixelMapPlus hpmp = new PixelMapPlus("./src/ed.ppm");
-		hpmp.resize(hpmp.width/2, hpmp.height/2);
+		//hpmp.resize(hpmp.width/2, hpmp.height/2);
 		PixelMapPlus grand = new PixelMapPlus("./src/ed.ppm");
 		grand.inset(hpmp, 400, 350);
 		grand.rotate(0, 0, -0.174533);
+		grand.zoomIn(-100, 700, 2);
 		
 		new DisplayImageWindow(wName, grand);
 		/**
