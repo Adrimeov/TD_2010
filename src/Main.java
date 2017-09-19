@@ -36,9 +36,10 @@ public class Main
 		PixelMapPlus hpmp = new PixelMapPlus("./src/ed.ppm");
 		//hpmp.resize(hpmp.width/2, hpmp.height/2);
 		PixelMapPlus grand = new PixelMapPlus("./src/ed.ppm");
-		grand.inset(hpmp, 400, 350);
-		grand.rotate(0, 0, -0.174533);
-		grand.zoomIn(-100, 700, 2);
+		grand.inset(hpmp, 250, 250);
+		//grand.rotate(0, 0, -0.174533);
+		//grand.zoomIn(-100, 700, 2);
+		grand.crop(1000, 240);
 		
 		new DisplayImageWindow(wName, grand);
 		/**

@@ -228,7 +228,27 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void crop(int h, int w)
 	{
 		// compl�ter		
+		PixelMap nouvelleImage = new PixelMap(this.imageType, h, w);
 		
+		int largeurMin = 0;
+		
+		if(w < this.width)
+			largeurMin = w;
+		else largeurMin = this.width;
+		
+		int hauteurMin = 0;
+		
+		if(h < this.height)
+			hauteurMin = h;
+		else hauteurMin = this.height;
+		
+		for(int i = 0 ; i < hauteurMin ; i++)
+			for(int j = 0 ; j < largeurMin ; j++)
+				nouvelleImage.imageData[i][j] = super.imageData[i][j];
+		
+		super.imageData = nouvelleImage.imageData;
+		super.width = w;
+		super.height = h;
 	}
 	
 	/**
