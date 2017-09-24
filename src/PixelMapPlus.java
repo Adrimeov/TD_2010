@@ -69,7 +69,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToBWImage()
 	{
 		// complï¿½ter
-		//Vï¿½rifier si l'image est dï¿½jï¿½ au bon format
+		//Verifier si l'image est deja au bon format
 		if(super.imageType == ImageType.BW)
 			return;
 			
@@ -89,7 +89,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToGrayImage()
 	{
 		// complï¿½ter
-		//Vï¿½rifier si l'image est dï¿½jï¿½ au bon format
+		//Verifier si l'image est deja au bon format
 		if(super.imageType == ImageType.Gray)
 			return;
 		
@@ -109,7 +109,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToColorImage()
 	{
 		// complï¿½ter
-		//Vï¿½rifier si l'image est dï¿½jï¿½ au bon format
+		//Verifier si l'image est deja au bon format
 		if(super.imageType == ImageType.Color)
 			return;
 		
@@ -126,7 +126,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void convertToTransparentImage()
 	{
 		// complï¿½ter
-		//Vï¿½rifier si l'image est dï¿½jï¿½ au bon format
+		//Verifier si l'image est deja au bon format
 		if(super.imageType == ImageType.Transparent)
 			return;
 		
@@ -150,10 +150,14 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void rotate(int x, int y, double angleRadian)
 	{
 		// complï¿½ter
+		//Si l'angle est un multiple de 2pi radians, ne rien modifier, car aucune rotation
 		if((angleRadian % (2*Math.PI))==0)
 			return; 
+		
+		//Creation d'une nouvelle image avec tous les pixels en blanc
 		PixelMap nouvelleImage = new PixelMap(super.imageType,super.height,super.width);
 		
+		//Initialisation de la matrice de rotation
 		double matrix1[][] = {{Math.cos(angleRadian),
 							-1.0f*(Math.sin(angleRadian)),
 							-1.0f*(Math.cos(angleRadian))*(double)x+(Math.sin(angleRadian)*(double)y+(double)x)},
@@ -162,24 +166,32 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 							-1.0f*(Math.sin(angleRadian))*(-1.0f*(double)x)+(Math.cos(angleRadian)*(double)y+(double)y)
 							}}; 
 		
-		
+		//Parcourir tous les pixels de l'image subissant la rotation pour trouver son homologue
 		for(int i = 0; i<super.height; i++) {
 			for(int j = 0; j<super.width; j++) {
+				//Matrice qui sera multipliee par la matrice de rotation
 				double matrix2[] = {i,j,1.0f};
 				
+				//Matrice correspondant a l'emplacement du pixel (i, j) apres sa rotation
 				double[] nouvelleCoordonne = {0,0};
 				
+				//Multuplication matricielle
 				for(int k = 0; k<2; k++)
 					for(int l = 0; l<3;l++)
 						nouvelleCoordonne[k] += matrix1[k][l] * matrix2[l];
 				
+				//Si le nouvel emplacement est dans l'image, copier le pixel d'origine vers la nouvelle image
 				if((int)nouvelleCoordonne[0]>=0 && (int)nouvelleCoordonne[0]<super.height && (int)nouvelleCoordonne[1]>=0 && (int)nouvelleCoordonne[1]<super.width )
 					nouvelleImage.imageData[(int)(nouvelleCoordonne[0])][(int)(nouvelleCoordonne[1])] = super.imageData[i][j];
 				
 				
 			}
 		}
-		super.imageData = nouvelleImage.imageData; 
+		//Changer le PixelMap de l'ancienne image par celui apres la rotation
+		super.imageData = nouvelleImage.imageData;
+		
+		//Supprimer les donnees de la nouvelle image
+		nouvelleImage.clearData();
 	}
 	
 	/**
@@ -193,19 +205,26 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			throw new IllegalArgumentException();
 		
 		// complï¿½ter
+		//Calcul des ratios de grossissement (< 0 signifie retrecissement)
 		float ratioHauteur = (float)h/(float)super.height;
 		float ratioLargeur = (float)w/(float)super.width;
 		
+		//Creation d'une matrice de pixels qui contiendra l'image apres le resize
 		AbstractPixel[][] tempo = new AbstractPixel[h][w];
 		
+		//Pour chacun des pixels de la nouvelle image, trouver celui correspondant dans l'ancienne
 		for(int i = 0; i<h;i++)
 			for(int j = 0; j<w; j++)
 				tempo[i][j] = super.imageData[(int)(i/ratioHauteur)][(int)(j/ratioLargeur)];
 	
 		
-		
+		//Remplacer l'ancienne image par la nouvelle
 		super.imageData = tempo; 
-		tempo = null; 
+		
+		//Supression de l'image temporaire
+		tempo = null;
+		
+		//Mettre a jour les dimensions de l'image
 		super.height = h;
 		super.width = w; 
 	}
@@ -216,6 +235,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void inset(PixelMap pm, int row0, int col0)
 	{
 		// complï¿½ter
+		
+		//Pour chaque pixel de l'image a ajouter, modifier le pixel si son indice est valide
 		for(int i = row0; i < pm.height + row0 ; i++)
 			for(int j = col0; j < pm.width + col0 ; j++)
 				if(i >= 0 && i < this.height && j >= 0 && j < this.width)
@@ -227,26 +248,31 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void crop(int h, int w)
 	{
-		// complï¿½ter		
+		// complï¿½ter
+		//Creation d'une nouvelle image de la bonne dimensions avec que des pixels blancs
 		PixelMap nouvelleImage = new PixelMap(this.imageType, h, w);
 		
+		//Identifier la section commune aux deux images
 		int largeurMin = 0;
-		
 		if(w < this.width)
 			largeurMin = w;
 		else largeurMin = this.width;
 		
 		int hauteurMin = 0;
-		
 		if(h < this.height)
 			hauteurMin = h;
 		else hauteurMin = this.height;
 		
+		
+		//Parcourir la section commune et transferer les pixels de l'ancienne image vers la nouvelle
 		for(int i = 0 ; i < hauteurMin ; i++)
 			for(int j = 0 ; j < largeurMin ; j++)
 				nouvelleImage.imageData[i][j] = super.imageData[i][j];
 		
+		//Transferer les donnees de la nouvelle image vers l'anciennce
 		super.imageData = nouvelleImage.imageData;
+		
+		//Mise a jour des nouvelles dimensions de l'objet courant
 		super.width = w;
 		super.height = h;
 	}
@@ -271,6 +297,10 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		if(zoomFactor < 1.0)
 			throw new IllegalArgumentException();
 		
+		//Si le zoom est de 1x, alors ne rien faire
+		if(zoomFactor == 1)
+			return;
+		
 		// complï¿½ter
 		//Calcul de la dimension de la partie agrandie
 		int hauteur = (int)(this.height / zoomFactor);
@@ -290,31 +320,34 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		
 		//Extraire la portion à zoomer
 		int hauteurMin = x - hauteur / 2;
-		int hauteurMax = x + hauteur / 2;
 		int largeurMin = y - largeur / 2;
-		int largeurMax = y + largeur / 2;
 		int largeurEnCours = largeurMin;
 		int hauteurEnCours = hauteurMin; 
 		
-		PixelMap nouvelleImage = new PixelMap(super.imageType, hauteur, largeur);
 		
+		//Creation d'une matrice contenant seulement la zone qui devra etre agrandie
+		AbstractPixel[][] nouvelleImage = new AbstractPixel[hauteur][largeur];
 
+		//Transferer les pixels de la zone a agrandir vers la nouvelle image
 		for(int i = 0 ; i < hauteur ; i++) {
 			for(int j = 0 ; j < largeur; j++) {
-				nouvelleImage.imageData[i][j] = super.imageData[hauteurEnCours][largeurEnCours];
+				nouvelleImage[i][j] = super.imageData[hauteurEnCours][largeurEnCours];
 				largeurEnCours++;
 			}
 			hauteurEnCours++;
 			largeurEnCours = largeurMin;
 		}
 		
-		super.imageData = nouvelleImage.imageData;
+		//Remplacer l'image de l'objet courant par la nouvelle creee precedemment
+		super.imageData = nouvelleImage;
 		
+		//Mise a jour et en memoire des tailles des images
 		int hauteurOriginal = super.height;
 		int largeurOriginal = super.width;
 		super.height = hauteur;
 		super.width = largeur;
 		
+		//Effectuer l'agrandrissement de l'image avec la methode existante
 		this.resize(largeurOriginal, hauteurOriginal);
 		
 	}
