@@ -1,4 +1,3 @@
-//Patate
 
 public class Main 
 {
@@ -12,7 +11,7 @@ public class Main
 		 * Exercice 1
 		 */
 
-		PixelMap pmc = new PixelMap("src/ed.ppm");
+		PixelMap pmc = new PixelMap("./src/ed.ppm");
 		PixelMap pmg = pmc.toGrayImage();
 		PixelMap pmb = pmc.toBWImage();
 
@@ -22,47 +21,21 @@ public class Main
 				pmt.getPixel(i, j).setAlpha(127);
 
 		String wName = "Edsger Dijkstra (original)";
-		//new DisplayImageWindow(wName, pmc, 50, 50);
+		new DisplayImageWindow(wName, pmc, 50, 50);
 
 		wName = "Edsger Dijkstra (gris)";
-		//new DisplayImageWindow(wName, pmg, 50+50, 50+50);
+		new DisplayImageWindow(wName, pmg, 50+50, 50+50);
 
 		wName = "Edsger Dijkstra (B&W)";
-		//new DisplayImageWindow(wName, pmb, 50+100, 50+100);
+		new DisplayImageWindow(wName, pmb, 50+100, 50+100);
 
 		wName = "Edsger Dijkstra (Transparent)";
-		//new DisplayImageWindow(wName, pmt, 200, 200);
+		new DisplayImageWindow(wName, pmt, 200, 200);
 
-		PixelMapPlus hpmp = new PixelMapPlus("./src/ed.ppm");
-		//hpmp.resize(hpmp.width/2, hpmp.height/2);
-		PixelMapPlus grand = new PixelMapPlus("./src/ed.ppm");
-		grand.inset(hpmp, 250, 250);
-		//grand.rotate(0, 0, -0.174533);
-		//grand.zoomIn(-100, 700, 2);
-		grand.crop(640, 480);
-		grand.inverser();
-		int[] tMin = new int[3];
-		tMin[0] = 110;
-		tMin[1] = 110;
-		tMin[2] = 110;
-		int[] tMax = new int[3];
-		tMax[0] = 220;
-		tMax[1] = 220;
-		tMax[2] = 220;
-		int[] newColors = new int[3];
-		newColors[0] = 255;
-		newColors[1] = 255;
-		newColors[2] = 255;
-		
-		//grand.replaceColor(new ColorPixel(tMin), new ColorPixel(tMax), new ColorPixel(newColors));
-		PixelMapPlus pmp = new PixelMapPlus("./src/ed.ppm");
-		grand.translate(pmp.getHeight()/2, 400);
-		
-		new DisplayImageWindow(wName, grand);
 		/**
 		 * Exercice 2
 		 */
-		/*
+		
 		PixelMapPlus pmp = new PixelMapPlus("./src/ed.ppm");
 
 		PixelMapPlus hpmp = new PixelMapPlus( pmp );
@@ -108,6 +81,6 @@ public class Main
 		
 		wName = "Edsger Dijkstra";
 		new DisplayImageWindow(wName, pmp);
-		*/
+
 	}
 }

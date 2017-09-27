@@ -57,8 +57,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void negate()
 	{
 		//Transformer tous les pixels en n�gatif
-		for(int i = 0 ; i < super.width ; i++)
-			for(int j = 0 ; j < super.height ; j++)
+		for(int i = 0 ; i < super.height ; i++)
+			for(int j = 0 ; j < super.width ; j++)
 				super.imageData[i][j] = super.imageData[i][j].Negative();
 	}
 	
@@ -72,8 +72,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			return;
 			
 		//Transformer tous les pixels au nouveau format
-		for(int i = 0 ; i < super.width ; i++)
-			for(int j = 0 ; j < super.height ; j++)
+		for(int i = 0 ; i < super.height ; i++)
+			for(int j = 0 ; j < super.width ; j++)
 				super.imageData[i][j] = super.imageData[i][j].toBWPixel();
 		
 		//Changer le format de l'image
@@ -91,8 +91,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			return;
 		
 		//Transformer tous les pixels au nouveau format
-		for(int i = 0 ; i < super.width ; i++)
-			for(int j = 0 ; j < super.height ; j++)
+		for(int i = 0 ; i < super.height ; i++)
+			for(int j = 0 ; j < super.width ; j++)
 				super.imageData[i][j] = super.imageData[i][j].toGrayPixel();
 		
 		//Changer le format de l'image
@@ -110,8 +110,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			return;
 		
 		//Transformer tous les pixels au nouveau format
-		for(int i = 0 ; i < super.width ; i++)
-			for(int j = 0 ; j < super.height ; j++)
+		for(int i = 0 ; i < super.height ; i++)
+			for(int j = 0 ; j < super.width ; j++)
 				super.imageData[i][j] = super.imageData[i][j].toColorPixel();
 		
 		//Changer le format de l'image
@@ -126,8 +126,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			return;
 		
 		//Transformer tous les pixels au nouveau format
-		for(int i = 0 ; i < super.width ; i++)
-			for(int j = 0 ; j < super.height ; j++)
+		for(int i = 0 ; i < super.height ; i++)
+			for(int j = 0 ; j < super.width ; j++)
 				super.imageData[i][j] = super.imageData[i][j].toTransparentPixel();
 		
 		//Changer le format de l'image
