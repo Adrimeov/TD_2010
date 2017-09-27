@@ -41,6 +41,22 @@ public class Main
 		//grand.zoomIn(-100, 700, 2);
 		grand.crop(640, 480);
 		grand.inverser();
+		int[] tMin = new int[3];
+		tMin[0] = 110;
+		tMin[1] = 110;
+		tMin[2] = 110;
+		int[] tMax = new int[3];
+		tMax[0] = 220;
+		tMax[1] = 220;
+		tMax[2] = 220;
+		int[] newColors = new int[3];
+		newColors[0] = 255;
+		newColors[1] = 255;
+		newColors[2] = 255;
+		
+		//grand.replaceColor(new ColorPixel(tMin), new ColorPixel(tMax), new ColorPixel(newColors));
+		PixelMapPlus pmp = new PixelMapPlus("./src/ed.ppm");
+		grand.translate(pmp.getHeight()/2, 400);
 		
 		new DisplayImageWindow(wName, grand);
 		/**

@@ -56,7 +56,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void negate()
 	{
-		// complï¿½ter
 		//Transformer tous les pixels en nï¿½gatif
 		for(int i = 0 ; i < super.width ; i++)
 			for(int j = 0 ; j < super.height ; j++)
@@ -68,7 +67,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void convertToBWImage()
 	{
-		// complï¿½ter
 		//Verifier si l'image est deja au bon format
 		if(super.imageType == ImageType.BW)
 			return;
@@ -88,7 +86,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void convertToGrayImage()
 	{
-		// complï¿½ter
 		//Verifier si l'image est deja au bon format
 		if(super.imageType == ImageType.Gray)
 			return;
@@ -108,7 +105,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void convertToColorImage()
 	{
-		// complï¿½ter
 		//Verifier si l'image est deja au bon format
 		if(super.imageType == ImageType.Color)
 			return;
@@ -125,7 +121,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	
 	public void convertToTransparentImage()
 	{
-		// complï¿½ter
 		//Verifier si l'image est deja au bon format
 		if(super.imageType == ImageType.Transparent)
 			return;
@@ -149,7 +144,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void rotate(int x, int y, double angleRadian)
 	{
-		// complï¿½ter
 		//Si l'angle est un multiple de 2pi radians, ne rien modifier, car aucune rotation
 		if((angleRadian % (2*Math.PI))==0)
 			return; 
@@ -203,8 +197,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	{
 		if(w < 0 || h < 0)
 			throw new IllegalArgumentException();
-		
-		// complï¿½ter
 		//Calcul des ratios de grossissement (< 0 signifie retrecissement)
 		float ratioHauteur = (float)h/(float)super.height;
 		float ratioLargeur = (float)w/(float)super.width;
@@ -233,9 +225,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 * Insert pm dans l'image a la position row0 col0
 	 */
 	public void inset(PixelMap pm, int row0, int col0)
-	{
-		// complï¿½ter
-		
+	{	
 		//Pour chaque pixel de l'image a ajouter, modifier le pixel si son indice est valide
 		for(int i = row0; i < pm.height + row0 ; i++)
 			for(int j = col0; j < pm.width + col0 ; j++)
@@ -282,8 +272,9 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void translate(int rowOffset, int colOffset)
 	{
-		// complï¿½ter		
-		
+		PixelMapPlus nouvelleImage = new PixelMapPlus(this.imageType, super.height, super.width);
+		nouvelleImage.inset(this, rowOffset, colOffset);
+		super.imageData = nouvelleImage.imageData; 	
 	}
 	
 	/**
@@ -300,8 +291,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		//Si le zoom est de 1x, alors ne rien faire
 		if(zoomFactor == 1)
 			return;
-		
-		// complï¿½ter
 		//Calcul de la dimension de la partie agrandie
 		int hauteur = (int)(this.height / zoomFactor);
 		int largeur = (int)(this.width / zoomFactor);
@@ -318,7 +307,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		else if ((y + largeur/2) >= this.width)
 			y = super.width - largeur/2;
 		
-		//Extraire la portion à zoomer
+		//Extraire la portion ï¿½ zoomer
 		int hauteurMin = x - hauteur / 2;
 		int largeurMin = y - largeur / 2;
 		int largeurEnCours = largeurMin;
@@ -362,12 +351,13 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void replaceColor(AbstractPixel min, AbstractPixel max,
 			AbstractPixel newPixel) {
-		// complï¿½ter
-		
+		for(int i = 0 ; i < super.height ; i++)
+			for(int j = 0 ; j < super.width ; j++)
+				if((super.imageData[i][j].compareTo(max) < 0) && (super.imageData[i][j].compareTo(min)>0))
+					super.imageData[i][j] = newPixel; 
 	}
 
 	public void inverser() {
-		// complï¿½ter
 		//Indices indiquant la moitie de l'image a parcourir
 		int moitiePixel = (super.width * super.height) / 2;
 		int compteurPixel = 0;
