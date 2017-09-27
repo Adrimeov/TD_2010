@@ -5,6 +5,7 @@
  */
 
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.Random;
 
 public class FormValidator 
@@ -131,6 +132,11 @@ public class FormValidator
 		Random generator = new Random( System.nanoTime() );
 		
 		// compléter
+		//Remplir la chaine de caracteres aleatoires
+		for(int i = 0 ; i < length ; i++)
+			charKey[i] = (char)(65 + generator.nextInt(26)); //65 = 'A'
+
+		return new String(charKey);
 		
 	}
 	
@@ -147,7 +153,10 @@ public class FormValidator
 		Random generator = new Random( System.nanoTime() );
 		
 		// compléter
+		//Remplir la chaine de nombres aleatoires
+		for(int i = 0 ; i < nb ; i++)
+			charTransform[i] = generator.nextInt(10);//48 = '0'
 		
+		return charTransform;
 	}
-
 }

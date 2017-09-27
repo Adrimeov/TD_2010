@@ -145,28 +145,37 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void rotate(int x, int y, double angleRadian)
 	{
 		//Si l'angle est un multiple de 2pi radians, ne rien modifier, car aucune rotation
-		if((angleRadian % (2*Math.PI))==0)
+		if(Math.abs((angleRadian % (2*Math.PI))) < 0.001f)
 			return; 
+		
+		//Si l'angle est un multiple de 2kpi + pi (rotation de 180 degres)
+		if(Math.abs((angleRadian % (2*Math.PI)) - Math.PI) < 0.001f) {
+			this.rotation180();
+			return;
+			//Nous avons creer cette methode a cause de l'erreur des images illustrant la methode inverser
+			//dans l'enonce. Comme elle existe, nous l'utilisation car elle est plus rapide est evite l'utilisation
+			//de la matrice de rotation
+			}
 		
 		//Creation d'une nouvelle image avec tous les pixels en blanc
 		PixelMap nouvelleImage = new PixelMap(super.imageType,super.height,super.width);
 		
 		//Initialisation de la matrice de rotation
 		double matrix1[][] = {{Math.cos(angleRadian),
-							-1.0f*(Math.sin(angleRadian)),
-							-1.0f*(Math.cos(angleRadian))*(double)x+(Math.sin(angleRadian)*(double)y+(double)x)},
-							{Math.sin(angleRadian), 
+							Math.sin(angleRadian),
+							(-1.0f * Math.cos(angleRadian) * (double)x) - (Math.sin(angleRadian) * (double)y)+ (double)x},
+							{-1.0f*Math.sin(angleRadian), 
 							Math.cos(angleRadian),
-							-1.0f*(Math.sin(angleRadian))*(-1.0f*(double)x)+(Math.cos(angleRadian)*(double)y+(double)y)
+							(Math.sin(angleRadian) * (double)x) - (Math.cos(angleRadian) * (double)y) + (double)y
 							}}; 
 		
-		//Parcourir tous les pixels de l'image subissant la rotation pour trouver son homologue
-		for(int i = 0; i<super.height; i++) {
-			for(int j = 0; j<super.width; j++) {
+		//Parcourir tous les pixels de la nouvelle image subissant la rotation pour trouver son homologue dans celle d'origine
+		for(int i = 0; i<nouvelleImage.height; i++) {
+			for(int j = 0; j<nouvelleImage.width; j++) {
 				//Matrice qui sera multipliee par la matrice de rotation
 				double matrix2[] = {i,j,1.0f};
 				
-				//Matrice correspondant a l'emplacement du pixel (i, j) apres sa rotation
+				//Matrice correspondant a l'emplacement du pixel (i, j) avant sa rotation
 				double[] nouvelleCoordonne = {0,0};
 				
 				//Multuplication matricielle
@@ -174,11 +183,15 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 					for(int l = 0; l<3;l++)
 						nouvelleCoordonne[k] += matrix1[k][l] * matrix2[l];
 				
-				//Si le nouvel emplacement est dans l'image, copier le pixel d'origine vers la nouvelle image
-				if((int)nouvelleCoordonne[0]>=0 && (int)nouvelleCoordonne[0]<super.height && (int)nouvelleCoordonne[1]>=0 && (int)nouvelleCoordonne[1]<super.width )
-					nouvelleImage.imageData[(int)(nouvelleCoordonne[0])][(int)(nouvelleCoordonne[1])] = super.imageData[i][j];
-				
-				
+				//Si le nouvel emplacement est dans l'image initiale, copier le pixel d'origine vers la nouvelle image, sinon ajouter un pixel blanc
+				if((int)nouvelleCoordonne[0]>=0 && (int)nouvelleCoordonne[0]<nouvelleImage.height && (int)nouvelleCoordonne[1]>=0 && (int)nouvelleCoordonne[1]<nouvelleImage.width )
+					nouvelleImage.imageData[i][j] = super.imageData[(int)(nouvelleCoordonne[0])][(int)(nouvelleCoordonne[1])];
+				else if(j > 0)
+					nouvelleImage.imageData[i][j] = nouvelleImage.imageData[i][j - 1];
+				else if (i > 0)
+					nouvelleImage.imageData[i][j] = nouvelleImage.imageData[i - 1][j];
+				//Les conditions ci-haut sont pour eviter les pixels blancs avec les arrondissements
+				//On recopie le pixel a sa gauche ou celui plus haut
 			}
 		}
 		//Changer le PixelMap de l'ancienne image par celui apres la rotation
@@ -297,19 +310,19 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		
 		
 		//Recentrer le point choisi si image hors limite
-		if((x - hauteur/2) < 0)
-			x = hauteur / 2;
-		else if ((x + hauteur/2) >= this.height)
-			x = super.height - hauteur/2;
+		if((y - hauteur/2) < 0)
+			y = hauteur / 2;
+		else if ((y + hauteur/2) >= this.height)
+			y = super.height - hauteur/2;
 		
-		if((y - largeur/2) < 0)
-			y = largeur / 2;
-		else if ((y + largeur/2) >= this.width)
-			y = super.width - largeur/2;
+		if((x - largeur/2) < 0)
+			x = largeur / 2;
+		else if ((x + largeur/2) >= this.width)
+			x = super.width - largeur/2;
 		
 		//Extraire la portion ï¿½ zoomer
-		int hauteurMin = x - hauteur / 2;
-		int largeurMin = y - largeur / 2;
+		int hauteurMin = y - hauteur / 2;
+		int largeurMin = x - largeur / 2;
 		int largeurEnCours = largeurMin;
 		int hauteurEnCours = hauteurMin; 
 		
@@ -357,12 +370,24 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 					super.imageData[i][j] = newPixel; 
 	}
 
+	
 	public void inverser() {
+		//Parcourir la moitié des lignes et inverser ses pixels avec sa ligne homologue plus bas
+		for(int i = 0 ; i < super.height / 2; i++)
+			for(int j = 0 ; j < super.width ; j++) {
+				//Echanger les pixels
+				AbstractPixel temporaire = super.imageData[i][j];
+				super.imageData[i][j] = super.imageData[super.height - 1 - i][j];
+				super.imageData[super.height - 1 - i][j] = temporaire;
+			}
+	}
+	
+	public void rotation180() {
 		//Indices indiquant la moitie de l'image a parcourir
 		int moitiePixel = (super.width * super.height) / 2;
 		int compteurPixel = 0;
 
-		//Parcourir tous les pixles en ordre et les inverser avec son homologue
+		//Parcourir tous les pixels en ordre et les inverser avec son homologue
 		for(int i = 0 ; i < super.height ; i++)
 			for(int j = 0 ; j < super.width ; j++) {
 				//Sortir des boucles lorsque la moitie des pixels ont ete parcourus

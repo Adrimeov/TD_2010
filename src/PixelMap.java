@@ -289,7 +289,6 @@ public class PixelMap
 		else
 			throw new IOException(fileName + " : ne contient pas le bon entête");
 		
-		
 		while ((buffer = br.readLine()) != null){
 			if( buffer.length() > 0 &&  buffer.charAt(0) != '#'){
 				
