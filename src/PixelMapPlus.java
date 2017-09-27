@@ -368,6 +368,25 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 
 	public void inverser() {
 		// compl�ter
+		//Indices indiquant la moitie de l'image a parcourir
+		int moitiePixel = (super.width * super.height) / 2;
+		int compteurPixel = 0;
+
+		//Parcourir tous les pixles en ordre et les inverser avec son homologue
+		for(int i = 0 ; i < super.height ; i++)
+			for(int j = 0 ; j < super.width ; j++) {
+				//Sortir des boucles lorsque la moitie des pixels ont ete parcourus
+				if(compteurPixel == moitiePixel){
+					i = super.height;
+					j = super.width;
+					break;
+				}
 				
+				//Echanger les pixels
+				AbstractPixel temporaire = super.imageData[i][j];
+				super.imageData[i][j] = super.imageData[super.height - 1 - i][super.width - 1 - j];
+				super.imageData[super.height - 1 - i][super.width - 1 - j] = temporaire;
+				compteurPixel++;
+			}
 	}
 }

@@ -39,7 +39,8 @@ public class Main
 		grand.inset(hpmp, 250, 250);
 		//grand.rotate(0, 0, -0.174533);
 		//grand.zoomIn(-100, 700, 2);
-		grand.crop(1000, 240);
+		grand.crop(640, 480);
+		grand.inverser();
 		
 		new DisplayImageWindow(wName, grand);
 		/**
