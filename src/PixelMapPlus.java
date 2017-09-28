@@ -186,12 +186,6 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 				//Si le nouvel emplacement est dans l'image initiale, copier le pixel d'origine vers la nouvelle image, sinon ajouter un pixel blanc
 				if((int)nouvelleCoordonne[0]>=0 && (int)nouvelleCoordonne[0]<nouvelleImage.height && (int)nouvelleCoordonne[1]>=0 && (int)nouvelleCoordonne[1]<nouvelleImage.width )
 					nouvelleImage.imageData[i][j] = super.imageData[(int)(nouvelleCoordonne[0])][(int)(nouvelleCoordonne[1])];
-				else if(j > 0)
-					nouvelleImage.imageData[i][j] = nouvelleImage.imageData[i][j - 1];
-				else if (i > 0)
-					nouvelleImage.imageData[i][j] = nouvelleImage.imageData[i - 1][j];
-				//Les conditions ci-haut sont pour eviter les pixels blancs avec les arrondissements
-				//On recopie le pixel a sa gauche ou celui plus haut
 			}
 		}
 		//Changer le PixelMap de l'ancienne image par celui apres la rotation
