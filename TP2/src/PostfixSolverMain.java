@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.EmptyStackException;
 
 public class PostfixSolverMain 
 {
@@ -56,9 +57,31 @@ public class PostfixSolverMain
         ArrayStack<Boolean> stack = new ArrayStack<>();
         //L'expression est séparée en tokens selon les espaces.
         for (String token : input.split("\\s")) {
+            if(token.length() == 1) {
+                if (token.equals("1"))
+                    stack.push(true);
+                else if(token.equals("0"))
+                    stack.push(false);
+                else
+                    throw new ParsingErrorException();
+            }
+            else {
+                try {
+                    if (token.equals("and")) {
+                        stack.push(Boolean.logicalAnd(stack.pop(), stack.pop()));
+                    } else if (token.equals("or")) {
+                        stack.push(Boolean.logicalOr(stack.pop(), stack.pop()));
+                    } else if(token.equals("not")){
+                        stack.push(!stack.pop());
+                    }
+                    else
+                        throw new ParsingErrorException();
+                }
+                catch(EmptyStackException e){
+                    throw new ParsingErrorException();
+                }
+            }
         }
-
-        return true;
-
+        return stack.pop();
     }
 }
