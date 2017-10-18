@@ -83,10 +83,18 @@ public class StackMain
         String[] words = input.split("\\s");
         String output = "";
 
+
         ArrayStack<String> stack = new ArrayStack<>();
          // À compléter
+        for(int i = 0; i< words.length; i++)
+            stack.push(words[i]);
 
-		 
+        while(!stack.empty()) {
+            output += stack.pop();
+            if( stack.size() != 0)
+                output+=" ";
+
+        }
         return output;
     }
 

@@ -8,6 +8,7 @@ public class ArrayStack<AnyType>
     private int size = 0; // Nombre d'éléments dans la pile.
     private AnyType[] table;
 
+
     // Initialisation de la pile.
     public ArrayStack()
     {
