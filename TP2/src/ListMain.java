@@ -4,11 +4,11 @@ public class ListMain
 
     public static void main(String[] args)
     {
-        boolean queueTestResult = testQueueBehaviour();
+       // boolean queueTestResult = testQueueBehaviour();
         boolean stackTestResult = testStackBehaviour();
         boolean listTestResult = testListBehaviour();
 
-        if (queueTestResult && stackTestResult && listTestResult) {
+        if (/*queueTestResult && */ stackTestResult && listTestResult) {
             System.out.print("DoublyLinkedList: It's all good!");
         }
     }

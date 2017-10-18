@@ -58,5 +58,7 @@ public class PostfixSolverMain
         for (String token : input.split("\\s")) {
         }
 
+        return true;
+
     }
 }

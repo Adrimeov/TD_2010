@@ -30,6 +30,7 @@ public class StackQueue<AnyType> implements Queue<AnyType>
 	public AnyType peek()
     {
         // À compléter
+		return null;
 	}
 	
 	// Retire l'élément en tête de file.

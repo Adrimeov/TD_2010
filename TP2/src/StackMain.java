@@ -85,6 +85,7 @@ public class StackMain
 
         ArrayStack<String> stack = new ArrayStack<>();
          // À compléter
+
 		 
         return output;
     }
