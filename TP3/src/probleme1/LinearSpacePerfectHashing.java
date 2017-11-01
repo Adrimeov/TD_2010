@@ -62,16 +62,19 @@ public class LinearSpacePerfectHashing<AnyType>
 	{
 		// A completer
 
+		return true;
 	}
 	
 	public int getKey (AnyType x) {
 		// A completer
-		
+
+		return 0;
 	}
 	
 	public boolean containsValue (AnyType x) {
 		// A completer
 
+		return true;
 	}
 	
 	public void remove (AnyType x) {
