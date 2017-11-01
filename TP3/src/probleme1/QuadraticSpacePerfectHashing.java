@@ -135,8 +135,15 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		String result = "";
 		
 		// A completer
-		
-		
+		for(AnyType element : items){
+			if(element != null) {
+				result += "(" + getKey(element) + ", " + element.toString() + "), ";
+			}
+		}
+
+		result = result.substring(0, result.length() - 2);
+		result += ".";
+
 		return result; 
 	}
 
