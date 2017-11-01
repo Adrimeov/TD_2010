@@ -70,7 +70,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	@SuppressWarnings("unchecked")
 	private void AllocateMemory(ArrayList<AnyType> array)
 	{
-		if(array == null || array.size() == 0)
+		if(array == null || array.size() == 0 || array.size() >= p)
 		{
 			// A completer
 			items = null;
@@ -84,7 +84,6 @@ public class QuadraticSpacePerfectHashing<AnyType>
 			a = b = 0;
 			return;
 		}
-
 		a = b = 0;
 
 		// A completer
@@ -102,7 +101,6 @@ public class QuadraticSpacePerfectHashing<AnyType>
 				if (!indice.contains(position))
 					indice.add(position);
 				else {
-					System.out.println(indice.size());
 					estValide = false;
 					indice = null;
 					break;
@@ -118,7 +116,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		return;
 	}
 
-	public void genererAleatoireAB(){
+	private void genererAleatoireAB(){
 		Random generator = new Random( System.nanoTime() );
 
 		do{
