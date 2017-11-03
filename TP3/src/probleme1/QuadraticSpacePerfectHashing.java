@@ -96,7 +96,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 			genererAleatoireAB();
 
 			for (AnyType element : array) {
-				Integer position = ((a * element.hashCode() + b) % p) % (array.size() * array.size());
+				Integer position = Math.abs(((a * element.hashCode() + b) % p) % (array.size() * array.size()));
 
 				if (!indice.contains(position))
 					indice.add(position);

@@ -51,7 +51,8 @@ public class LinearSpacePerfectHashing<AnyType>
 
 		for(AnyType element : array)
 		{
-			Integer position = ((a * element.hashCode() + b) % p) % (array.size());
+			int hashcode = element.hashCode();
+			Integer position = Math.abs(((a * element.hashCode() + b) % p) % (array.size()));
 			if(dictionnaire.containsKey(position))
 			{
 				dictionnaire.get(position).add(element);
