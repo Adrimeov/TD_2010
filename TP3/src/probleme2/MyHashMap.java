@@ -17,7 +17,7 @@ public class MyHashMap<KeyType, ValueType>
 
    public ValueType get(KeyType key)
    {
-      return (items.get(new Entry<KeyType,ValueType>(key,null) )).value;
+      return (items.get(new Entry<KeyType,ValueType>(key,null))).value;
    }
 
    public boolean isEmpty()
