@@ -13,6 +13,12 @@ public class HashMapTest
       
       System.out.println( mhmap.get(25) );
       System.out.println( mhmap.get(10) );
+
+      //Test du nombre d'occurences
+      String nom = "patate";
+      System.out.println("Nombre d'occurence de " + nom + " : "+ mhmap.nbreOccurence(nom));
+      nom = "chou-rave";
+      System.out.println("Nombre d'occurence de " + nom + " : "+ mhmap.nbreOccurence(nom));
    }
 
 }

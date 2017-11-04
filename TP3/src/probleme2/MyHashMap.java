@@ -25,6 +25,11 @@ public class MyHashMap<KeyType, ValueType>
       return ( items.nbElement() == 0 ); 
    }
 
+   //Permet de calculer le nombre d'occurence d'une certaine ValueType dans la map
+   public int nbreOccurence(ValueType value){
+       return items.nbreOccurence(new Entry<>(null, value));
+   }
+
    private static class Entry<KeyType,ValueType>
    {
       public KeyType key;
@@ -38,7 +43,12 @@ public class MyHashMap<KeyType, ValueType>
 
       public boolean equals(Object cmp)
       {
-         return this.hashCode() == cmp.hashCode();
+          return this.hashCode() == cmp.hashCode();
+      }
+
+      //Permet d'afficher la valeur de Entry
+      public String toString(){
+          return value.toString();
       }
 
       public int hashCode()
