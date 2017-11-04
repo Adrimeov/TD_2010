@@ -95,8 +95,8 @@ public class HashFunctions
        */
       // Effectues quelques tests aleatoires pour verifier les proprietes de taille
       pfhash = new LinearSpacePerfectHashing<Integer>();
-            
-      for(int i=0, nbElements = 10; i<40; ++i, nbElements += 10)
+
+      for(int i=0, nbElements = 46330; i<40; ++i, nbElements += 1)
       {
          pfhash.SetArray( randomIntegers( nbElements ) );
          System.out.println( nbElements + "\t" + pfhash.Size() );

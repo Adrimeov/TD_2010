@@ -70,7 +70,7 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	@SuppressWarnings("unchecked")
 	private void AllocateMemory(ArrayList<AnyType> array)
 	{
-		if(array == null || array.size() == 0 || array.size() >= p)
+		if(array == null || array.size() == 0 || (array.size() * array.size()) >= p)
 		{
 			// A completer
 			items = null;
