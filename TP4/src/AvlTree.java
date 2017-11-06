@@ -23,25 +23,30 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
     private Node<T> insert(Node<T> node, T elem)
     {
         // À compléter
+        return node;
     }
 
     private Node<T> balanceRightRight(Node<T> node)
     {
         // À compléter
+        return node;
     }
 
     private Node<T> balanceRightLeft(Node<T> node)
     {
         // À compléter
+        return node;
     }
 
     private Node<T> balanceLeftLeft(Node<T> node)
     {
         // À compléter
+        return node;
     }
 
     private Node<T> balanceLeftRight(Node<T> node)
     {
         // À compléter
+        return node;
     }
 }

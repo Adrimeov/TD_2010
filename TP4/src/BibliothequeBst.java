@@ -18,6 +18,8 @@ public class BibliothequeBst implements IBibliotheque
     public boolean contientLivre(String livre)
     {
         // À compléter
+
+        return true;
     }
 
     // Complexité: O(n)
@@ -27,6 +29,7 @@ public class BibliothequeBst implements IBibliotheque
     public String afficherLivresAlpha()
     {
         // À compléter
+        return "";
     }
 
     // Complexité: O(n)
@@ -36,5 +39,6 @@ public class BibliothequeBst implements IBibliotheque
     public String afficherLivresAlphaInverse()
     {
         // À compléter
+        return "";
     }
 }

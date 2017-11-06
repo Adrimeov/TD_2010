@@ -37,13 +37,31 @@ public class BST<T extends Comparable<T>>
     protected int getHeight(Node<T> node)
     {
         // À compléter
+        if(node == null)
+            return -1;
+        else return Math.max(getHeight(node.left), getHeight(node.right)) + 1;
     }
 
 	public void insert(T elem) { root = insert(root, elem); }
 
 	private Node<T> insert(Node<T> node, T elem)
     {
-		// À compléter
+		//Si le noeuds est courant est null, créer le noeud et le retourner
+        if(node == null)
+            return new Node<>(elem);
+
+        //Sinon, trouver la position du prochain noeud à analyser
+        int comparaison = elem.compareTo(node.val);
+
+        if(comparaison < 0)
+            node.left = insert(node.left, elem);
+        else if(comparaison > 0)
+            node.right = insert(node.right, elem);
+        else {
+            //Rien, car on ne veut pas de doublon
+        }
+
+        return node;
 	}
 
     public boolean contains(T elem) { return contains(root, elem); }
@@ -51,6 +69,14 @@ public class BST<T extends Comparable<T>>
     private boolean contains(Node<T> node, T elem)
     {
         // À compléter
+        if(node == null)
+            return false;
+        else if(node.val == elem)
+            return true;
+        else if(elem.compareTo(node.val) < 0)
+            return contains(node.left, elem);
+        else
+            return contains(node.right, elem);
     }
 
     public ArrayList<T> traversePreOrder()
