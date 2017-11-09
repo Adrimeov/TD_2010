@@ -8,18 +8,22 @@ public class BibliothequeBst implements IBibliotheque
 
     // Complexité: O(log(n))
     // Explication:
+    // Nous travaillons ici avec un arbre AVL,
     public void ajouterLivre(String livre)
     {
-        // À compléter
+       livres.insert(livre);
     }
 
     // Complexité: O(log(n))
-    // Explication:
+    // Explication: Nous travaillons avec un arbre équilibré. La recherche d'un
+    //              livre se fait donc en n(logn). Effectivement, les strings
+    //              sont un type dit integral. Ce type permet donc d'etre
+    //              comparé. Il est donc possible de placer les noeuds dans un
+    //              ordre logique, ceci permet ensuite de profiter des propriétés
+    //              d'équilibrage d'AVL.
     public boolean contientLivre(String livre)
     {
-        // À compléter
-
-        return true;
+        return livres.contains(livre);
     }
 
     // Complexité: O(n)
@@ -28,8 +32,15 @@ public class BibliothequeBst implements IBibliotheque
     //              un parcours en ordre/ascendant.
     public String afficherLivresAlpha()
     {
-        // À compléter
-        return "";
+        ArrayList<String> tempo = livres.traverseInOrder();
+
+        String aRetourner = "";
+        for(String elems:tempo)
+        {
+         aRetourner+=elems+"\n";
+        }
+
+        return aRetourner;
     }
 
     // Complexité: O(n)
@@ -38,7 +49,14 @@ public class BibliothequeBst implements IBibliotheque
     //              un parcours en ordre inverse/descendant.
     public String afficherLivresAlphaInverse()
     {
-        // À compléter
-        return "";
+        ArrayList<String> tempo = livres.traverseReverseOrder();
+
+        String aRetourner = "";
+        for(String elems:tempo)
+        {
+            aRetourner+=elems +"\n";
+        }
+
+        return aRetourner;
     }
 }

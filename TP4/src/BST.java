@@ -86,10 +86,17 @@ public class BST<T extends Comparable<T>>
 		return list;
 	}
 
-	private void traversePreOrder(Node<T> node, ArrayList<T> list)
-	{
-        // À compléter
-	}
+    private void traversePreOrder(Node<T> node, ArrayList<T> list)
+    {
+        if( node != null )
+        {
+            list.add(node.val);
+            traversePreOrder( node.left, list);
+            traversePreOrder( node.right, list);
+        }
+    }
+
+
 
     public ArrayList<T> traversePostOrder()
 	{
@@ -100,7 +107,12 @@ public class BST<T extends Comparable<T>>
 
 	private void traversePostOrder(Node<T> node, ArrayList<T> list)
 	{
-        // À compléter
+        if( node != null )
+        {
+            traversePostOrder(node.left, list);
+            traversePostOrder( node.right, list);
+            list.add(node.val);
+        }
 	}
 
     public ArrayList<T> traverseInOrder()
@@ -112,7 +124,12 @@ public class BST<T extends Comparable<T>>
 
     private void traverseInOrder(Node<T> node, ArrayList<T> list)
     {
-        // À compléter
+        if( node != null )
+        {
+            traverseInOrder(node.left, list);
+            list.add(node.val);
+            traverseInOrder( node.right, list);
+        }
     }
 
     public ArrayList<T> traverseReverseOrder()
@@ -124,7 +141,12 @@ public class BST<T extends Comparable<T>>
 
     private void traverseReverseOrder(Node<T> node, ArrayList<T> list)
     {
-        // À compléter
+        if( node != null )
+        {
+            traverseReverseOrder( node.right, list);
+            list.add(node.val);
+            traverseReverseOrder(node.left, list);
+        }
     }
 
     public ArrayList<T> traverseLevelOrder()
@@ -135,6 +157,13 @@ public class BST<T extends Comparable<T>>
 
         while (!queue.isEmpty()) {
             // À compléter
+            Node<T> tempo = queue.poll();
+            if(tempo != null) {
+                queue.add(tempo.left);
+                queue.add(tempo.right);
+                list.add(tempo.val);
+            }
+
         }
 
 		return list;
