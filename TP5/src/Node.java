@@ -56,10 +56,29 @@ public class Node {
         this.enfants.removeAll(enfants);
     }
 
+/**
+ * Permet de fusion deux arbres binomiaux de meme niveaux.
+ *
+ * @param  autre; l'arbre a fusionner
+ * @return Node: le resultat de la fusion
+ */
     public Node fusion(Node autre) throws DifferentOrderTrees {
 
-        // à compléter
-        return null;
+        if(this.ordre != autre.ordre)
+            throw new DifferentOrderTrees();
+
+        Node plusPetit;
+        if( autre.getVal() < valeur){
+            plusPetit = autre;
+            plusPetit.addEnfant(this);
+        }
+        else {
+            plusPetit = this;
+            plusPetit.addEnfant(autre);
+        }
+
+
+        return plusPetit;
     }
 
     private void moveUp() {
