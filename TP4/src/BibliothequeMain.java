@@ -1,5 +1,15 @@
 import com.sun.corba.se.impl.orb.ParserTable;
-
+///////////////////////////////////////////////////////////////////////////////
+//
+// Main Class File:  BibliothequeMain.java
+// File:             BibliothequeMain.java
+// Semester:         Automne 2017
+//
+// Author:           Jean-Frederic Fontaine 1856632
+//                   Simon Turcotte         1838092
+//Description:
+//            Main permettant de tester l'implementation d'une bibliotheque Bst
+//////////////////////////// 80 columns wide /////////////////////////////////
 public class BibliothequeMain
 {
     public static void main(String[] args)

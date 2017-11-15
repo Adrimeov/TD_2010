@@ -1,7 +1,17 @@
 import java.util.ArrayList;
+///////////////////////////////////////////////////////////////////////////////
+//
+// Main Class File:  BibliothequeMain.java
+// File:             BibliothequeBst.java
+// Semester:         Automne 2017
+//
+// Author:           Jean-Frederic Fontaine 1856632
+//                   Simon Turcotte         1838092
+//Description:
+//            Implémentation de l'interface IBibliotheque
+//            à l'aide d'un arbre de recherche binaire.
+//////////////////////////// 80 columns wide //////////////////////////////////
 
-// Implémentation de l'interface IBibliotheque
-// à l'aide d'un arbre de recherche binaire.
 public class BibliothequeBst implements IBibliotheque
 {
     private BST<String> livres = new AvlTree<String>();

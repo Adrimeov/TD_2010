@@ -1,8 +1,18 @@
 import java.util.ArrayList;
 import java.util.Collections;
+///////////////////////////////////////////////////////////////////////////////
+//
+// Main Class File:  AvlMain.java
+// File:             AvlTree.java
+// Semester:         Automne 2017
+//
+// Author:           Jean-Frederic Fontaine 1856632
+//                   Simon Turcotte         1838092
+//Description:
+//              Implémentation de l'interface IBibliotheque
+//              à l'aide d'une liste.
+//////////////////////////// 80 columns wide //////////////////////////////////
 
-// Implémentation de l'interface IBibliotheque
-// à l'aide d'une liste.
 public class BibliothequeListe implements IBibliotheque
 {
     private ArrayList<String> livres = new ArrayList<String>();

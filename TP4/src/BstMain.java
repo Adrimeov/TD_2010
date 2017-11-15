@@ -1,7 +1,17 @@
 import jdk.nashorn.internal.runtime.ECMAException;
 
 import java.util.Arrays;
-
+///////////////////////////////////////////////////////////////////////////////
+//
+// Main Class File:  BstMain.java
+// File:             BstMain.java
+// Semester:         Automne 2017
+//
+// Author:           Jean-Frederic Fontaine 1856632
+//                   Simon Turcotte         1838092
+//Description:
+//            Permet de tester l'implementation de l'arbre Bst
+//////////////////////////// 80 columns wide /////////////////////////////////
 public class BstMain
 {
     public static void main(String[] args)

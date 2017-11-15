@@ -1,4 +1,16 @@
 import java.lang.Comparable;
+///////////////////////////////////////////////////////////////////////////////
+//
+// Main Class File:  AvlMain.java
+// File:             AvlTree.java
+// Semester:         Automne 2017
+//
+// Author:           Jean-Frederic Fontaine 1856632
+//                   Simon Turcotte         1838092
+//Description:
+//              Implementation d'un arbre AVl qui s'equilibre si une modification
+//              a provoquer un desequilibre
+//////////////////////////// 80 columns wide //////////////////////////////////
 
 public class AvlTree<T extends Comparable<T>> extends BST<T>
 {
@@ -61,13 +73,11 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
 
         return node;
     }
-    //Param :
-    //  Node<T>: un noeud qui peut contenerir un type generique
-    //Description:
-    //          Rotation double vers la droite.
-    //
-    //
-
+    /**
+     * Permet de faire une rotation simple vers la droite.
+     * @param Un node generique de type T.
+     * @return retourne le noeud une fois balancer.
+     */
     private Node<T> balanceRightRight(Node<T> node)
     {
         Node<T> k2 = node.right;
@@ -79,13 +89,24 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
 
         return k2;
     }
-
+    /**
+     * Permet de faire une rotation double 'droite-gauche'
+     * cette fonction fait-elle meme appel a la fonction balanceLeftLeft
+     * @param Node<T> node; Node generique de type T.
+     * @return le noeud une fois la rotation double faite.
+     */
     private Node<T> balanceRightLeft(Node<T> node)
     {
         node.right = balanceLeftLeft( node.right );
         return balanceRightRight( node );
     }
 
+    /**
+     * Permet d'equilibrer l'arbre en faisant une rotation double
+     * vers la gauche. Un buffer 'k1' est utilise afin de resoudre la copie
+     * @param Node<T> node; Un node de generique de type T.
+     * @return retourne le noeud balancer vers la gauche
+     */
     private Node<T> balanceLeftLeft(Node<T> node)
     {
         Node<T> k1 = node.left;
@@ -95,11 +116,15 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
 
         return k1;
     }
+    /**
+     *Permet de faire une rotation double gauche droite.
+     * @param Node<T> node: un node de generique
+     * @return retourne le noeud une fois balancer
+     */
 
     private Node<T> balanceLeftRight(Node<T> node)
     {
         node.left = balanceRightRight( node.left );
         return balanceLeftLeft( node);
-
     }
 }
