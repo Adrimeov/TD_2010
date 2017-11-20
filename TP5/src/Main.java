@@ -4,24 +4,30 @@ public class Main
     public static void main(String[] args)
     {
         testMonceau();
+        testNode();
+
 
     }
 
-    public static void testNode
+    public static void testNode()
     {
         //Creation d'un tableau de 10 nodes
         ArrayList<Node> nodes = new ArrayList<>();
-        for(int i = 0; i<10; i++){
+        for(int i = 0; i<10; i++) {
             nodes.add(new Node(i));
         }
-        //Ajout des enfants a tout les noeuds
-        for(int i = 0; i<10; i++){
-            nodes.get(i).addEnfant(nodes.get(i));
+
+
+       //Node fusion = nodes.get(0).fusion(nodes.get(1));
+        System.out.println(nodes.get(1).ordre);
+        try {
+            Node fusion = nodes.get(0).fusion(nodes.get(1));
+            Node fusion2 = nodes.get(2).fusion(nodes.get(3));
+            Node fusionA4 = fusion.fusion(fusion2);
+            nodes.get(2).moveUp();
+            System.out.println(fusion.ordre);
         }
-        //Suprimme les enfants des 5 derniers noeuds
-        for(int i = 5; i<10; i++){
-            nodes.get(i).removeEnfants(nodes.get(i).getEnfants());
-        }
+        catch(DifferentOrderTrees e){ System.out.println("exeption");}
 
     }
 
@@ -31,7 +37,6 @@ public class Main
         //Création de monceaux
         Monceau monceau1 = new Monceau();
         Monceau monceau2 = new Monceau();
-
 
 
 

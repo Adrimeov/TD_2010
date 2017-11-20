@@ -40,9 +40,8 @@ public class Node {
         return enfants;
     }
 
-    public void addEnfant(Node enfant) {
-        enfants.add(enfant);
-    }
+    public void addEnfant(Node enfant) { enfants.add(enfant);}
+
 
     public boolean removeEnfant(Node enfant) {
         if (enfants.contains(enfant)) {
@@ -68,21 +67,57 @@ public class Node {
             throw new DifferentOrderTrees();
 
         Node plusPetit;
+        Node plusGrand;
         if( autre.getVal() < valeur){
             plusPetit = autre;
-            plusPetit.addEnfant(this);
+            plusGrand = this;
         }
         else {
             plusPetit = this;
-            plusPetit.addEnfant(autre);
+            plusGrand = autre;
         }
-
-
+        plusPetit.addEnfant(plusGrand);
+        plusGrand.parent = plusPetit;
+        plusPetit.ordre++;
         return plusPetit;
     }
-
-    private void moveUp() {
+    /**
+     * Permet de d'interchanger deux nodes, c'est-a-dire d'interchanger
+     * le node courant avec son parent.
+     *
+     * @param  None
+     * @return None
+     */
+    public void moveUp() {
         // à compléter
+        Node parentCourant = parent;
+        ArrayList<Node> enfantCourant = enfants;
+
+        if(parent != null) {
+            Node grandPapa = parent.parent;
+
+            for( Node element: enfants){
+                element.parent = parentCourant;
+            }
+            //on enleve le noeud courant de la liste denfant de son parents
+            parentCourant.enfants.remove(this);
+            //ajoute le noeud parents dans la liste denfant de lobjet courant
+            parentCourant.enfants.add(parentCourant);
+            //on change le pere du pere courant pour lobjet courant
+            parentCourant.parent = this;
+            //On interchange les ordres
+            int temp = this.ordre;
+            this.ordre = parentCourant.ordre;
+            parentCourant.ordre = temp;
+
+            if(grandPapa != null){
+                this.parent = grandPapa;
+                grandPapa.enfants.remove(parentCourant);
+                grandPapa.enfants.add(this);
+            }
+            else
+                this.parent = null;
+        }
     }
 
     public ArrayList<Node> delete() {
