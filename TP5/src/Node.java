@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -85,10 +86,9 @@ public class Node {
      * Permet de d'interchanger deux nodes, c'est-a-dire d'interchanger
      * le node courant avec son parent.
      *
-     * @param  None
      * @return None
      */
-    public void moveUp() {
+    private void moveUp() {
         // à compléter
         Node parentCourant = parent;
         ArrayList<Node> enfantCourant = enfants;
@@ -109,6 +109,11 @@ public class Node {
             int temp = this.ordre;
             this.ordre = parentCourant.ordre;
             parentCourant.ordre = temp;
+            //On associe les enfants du noeuds courant a l'ancien parent
+            ArrayList<Node> listeTemp = parentCourant.enfants;
+            parentCourant.enfants = this.enfants;
+            //On associe les nouveaux enfants au noeud courant
+            this.enfants = listeTemp;
 
             if(grandPapa != null){
                 this.parent = grandPapa;
@@ -120,23 +125,80 @@ public class Node {
         }
     }
 
+
+    /**
+     * Permet de supprimer le noeud courant de l'arbre binomial
+     *
+     * @return ArrayList<Node> : arbres binomaiaux restants apres la supression du noeud
+     */
     public ArrayList<Node> delete() {
         // à compléter
-        return null;
+        while(parent != null)
+            moveUp();
+
+        ArrayList<Node> noeudsRestants = new ArrayList<>();
+        for(Node element : enfants){
+            element.parent = null; //Ajustement du parent des noeuds
+            noeudsRestants.add(element);
+        }
+
+        return noeudsRestants;
     }
 
     public void print(String tabulation) {
         // à compléter
     }
-    
+
+
+    /**
+     * Permet de retrouver un noeud avec la valeur passée en paramètre
+     *
+     * @param  valeur : valeur du noeud à trouver
+     * @return Node : noeud ayant la valeur recherchée
+     */
     public Node findValue(int valeur) {
         // à compléter
+        //Si le noeud courant a la valeur recherchée, le retourner
+        if(this.valeur == valeur)
+            return this;
+
+        //Explorer chacun des enfants du noeud
+        for(Node element : enfants){
+            //Rechercher le noeud enfant seulement lorsque la valeur peut s'y retrouver
+            if(element.valeur <= valeur) {
+                Node trouve = element.findValue(valeur);
+                if (trouve != null)
+                    return trouve; //Valeur a été trouvée
+            }
+        }
+
+        //La valeur n'a pas été trouvée
         return null;
     }
-    
+
+
+    /**
+     * Permet de retourner la liste des valeurs en ordre croissant
+     *
+     * @return ArrayList<Integer> : liste des valeurs du sous-arbre
+     */
     public ArrayList<Integer> getElementsSorted() {
     	// à compléter
-    	
-    	return null;
+        ArrayList<Integer> liste = new ArrayList<>();
+
+        //Ajouter le noeud courant
+        liste.add(valeur);
+
+        //Ajouter les valeurs de chacun des enfants
+        ArrayList<Integer> listeEnfant;
+        for (Node element : enfants) {
+            listeEnfant = element.getElementsSorted();
+            for (Integer valeur : listeEnfant)
+                liste.add(valeur);
+        }
+
+        Collections.sort(liste);
+
+    	return liste;
     }
 }
