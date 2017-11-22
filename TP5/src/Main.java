@@ -19,30 +19,35 @@ public class Main
 
 
        //Node fusion = nodes.get(0).fusion(nodes.get(1));
-        System.out.println(nodes.get(1).ordre);
+        //
+        // System.out.println(nodes.get(1).ordre);
         try {
             Node fusion = nodes.get(0).fusion(nodes.get(1));
             Node fusion2 = nodes.get(2).fusion(nodes.get(3));
             Node fusionA4 = fusion.fusion(fusion2);
+            Node fusionA8 = fusionA4.fusion(fusionA4);
+            int a = 1;
             //nodes.get(2).moveUp();
-            System.out.println(fusion.ordre);
+            //System.out.println(fusion.ordre);
 
-            //Affichage arbre d'ordre 2
-            ArrayList<Integer> fusion4 = fusionA4.getElementsSorted();
-            for(Integer entier : fusion4)
-                System.out.print(entier + " ");
-            System.out.println();
+//            //Affichage arbre d'ordre 2
+//            ArrayList<Integer> fusion4 = fusionA4.getElementsSorted();
+//            for(Integer entier : fusion4)
+//                System.out.print(entier + " ");
+//            System.out.println();
 
             //Tester la methode find
-            int aTrouve = 3;
-            Node trouve = fusionA4.findValue(aTrouve);
-            if(trouve != null)
-                System.out.println("Noeud " + aTrouve + " : " + trouve.getVal());
-            else
-                System.out.println("Noeud " + aTrouve + " non trouve");
+//            int aTrouve = 3;
+//            Node trouve = fusionA4.findValue(aTrouve);
+//            if(trouve != null)
+//                System.out.println("Noeud " + aTrouve + " : " + trouve.getVal());
+//            else
+//                System.out.println("Noeud " + aTrouve + " non trouve");
 
+
+            fusionA8.print();
             //Affichage arbre d'ordre 2
-            ArrayList<Node> restants = trouve.delete();
+            //ArrayList<Node> restants = trouve.delete();
             int i = 0;
 
         }
