@@ -145,8 +145,48 @@ public class Node {
         return noeudsRestants;
     }
 
+    /**
+     * Permet d'afficher l'arbre binomial
+     *
+     * @return void
+     */
     public void print(String tabulation) {
         // à compléter
+        print(tabulation, 1, true);
+    }
+
+    /**
+     * Permet d'afficher chacun des noeuds de facon recursive
+     *
+     * @param tabulation : separateur entre les elements
+     * @param profondeur : hauteur du noeud dans l'arboresence + 1
+     * @param premierLigne : si le noeud est le premier de sa ligne dans l'affichage
+     *
+     * @return void
+     */
+    private void print(String tabulation, int profondeur, boolean premierLigne){
+        //Ajouter une tabulation
+        if(!premierLigne)
+            System.out.print(tabulation);
+
+        //Si le noeud est une feuille
+        if(enfants.size() == 0)
+            System.out.println(valeur);
+        else {
+            //Affichage du noeud courant
+            System.out.print(valeur);
+
+            for (int i = 0; i < enfants.size(); i++) {
+                //Ajouter des tabulations si l'enfant en cours n'est pas le premier
+                if (i != 0) {
+                    for(int j = 0 ; j < profondeur ; j++)
+                        System.out.print("\t");
+                    enfants.get(i).print(tabulation, profondeur + 1, true);
+                }
+                else
+                    enfants.get(i).print(tabulation, profondeur + 1, false);
+            }
+        }
     }
 
 

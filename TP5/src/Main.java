@@ -13,7 +13,7 @@ public class Main
     {
         //Creation d'un tableau de 10 nodes
         ArrayList<Node> nodes = new ArrayList<>();
-        for(int i = 0; i<10; i++) {
+        for(int i = 5; i<15; i++) {
             nodes.add(new Node(i));
         }
 
@@ -25,7 +25,12 @@ public class Main
             Node fusion = nodes.get(0).fusion(nodes.get(1));
             Node fusion2 = nodes.get(2).fusion(nodes.get(3));
             Node fusionA4 = fusion.fusion(fusion2);
-            Node fusionA8 = fusionA4.fusion(fusionA4);
+
+            Node fusionB = nodes.get(4).fusion(nodes.get(5));
+            Node fusion2B = nodes.get(6).fusion(nodes.get(7));
+            Node fusionB4 = fusionB.fusion(fusion2B);
+
+            Node fusionA8 = fusionA4.fusion(fusionB4);
             int a = 1;
             //nodes.get(2).moveUp();
             //System.out.println(fusion.ordre);
@@ -45,7 +50,7 @@ public class Main
 //                System.out.println("Noeud " + aTrouve + " non trouve");
 
 
-            fusionA8.print();
+            fusionA8.print("->");
             //Affichage arbre d'ordre 2
             //ArrayList<Node> restants = trouve.delete();
             int i = 0;
