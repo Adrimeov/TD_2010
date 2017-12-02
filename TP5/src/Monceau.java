@@ -100,10 +100,17 @@ public class Monceau {
      * @param  val : valeur à insérer
      * @return void
      */
-    public void insert(int val) {
+    public void insert(int val)throws DifferentOrderTrees {
         // à compléter
-
-
+        Node trouve = find(0);
+        Node nodeTempo = new Node(val);
+        if(trouve != null) {
+            this.arbres.add(nodeTempo);
+            return;
+        }
+        Monceau tempo = new Monceau();
+        tempo.arbres.add(nodeTempo);
+        this.fusion(tempo);
     }
 
     /**
@@ -112,10 +119,22 @@ public class Monceau {
      * @param  val : valeur du noeud à supprimer
      * @return boolean : si le monceau possède a ete supprimer
      */
-    public boolean delete (int val) {
+    public boolean delete (int val)throws DifferentOrderTrees {
         // à compléter
-        
-        return false;
+        boolean trouver = false;
+        for(int i = 0; i<arbres.size();i++){
+            Node nodeTrouver = arbres.get(i).findValue(val);
+            if(nodeTrouver!=null){
+                ArrayList<Node> arrayTempo = nodeTrouver.delete();
+                Monceau monceauTempo = new Monceau();
+                monceauTempo.arbres.addAll(arrayTempo);
+                fusion(monceauTempo);
+                trouver = true;
+                i=-1;
+            }
+
+        }
+        return trouver;
     }
 
 
