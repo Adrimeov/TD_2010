@@ -57,25 +57,29 @@ public class Node implements Comparable<Node> {
     }
 
 /**
- * Permet de fusion deux arbres binomiaux de meme niveaux.
+ * Permet de fusioner deux arbres binomiaux de meme niveaux.
  *
- * @param  autre; l'arbre a fusionner
- * @return Node: le resultat de la fusion
+ * @param  autre : l'arbre a fusionner
+ * @return Node : le resultat de la fusion
  */
     public Node fusion(Node autre) throws DifferentOrderTrees {
 
         if(this.ordre != autre.ordre)
             throw new DifferentOrderTrees();
 
+        //Clone des nodes afin de ne pas modifier ceux recus
+        Node thisClone = this.clone();
+        Node autreClone = autre.clone();
+
         Node plusPetit;
         Node plusGrand;
-        if( autre.getVal() < valeur){
-            plusPetit = autre;
-            plusGrand = this;
+        if( autre.valeur < thisClone.valeur){
+            plusPetit = autreClone;
+            plusGrand = thisClone;
         }
         else {
-            plusPetit = this;
-            plusGrand = autre;
+            plusPetit = thisClone;
+            plusGrand = autreClone;
         }
         plusPetit.addEnfant(plusGrand);
         plusGrand.parent = plusPetit;
@@ -83,7 +87,7 @@ public class Node implements Comparable<Node> {
         return plusPetit;
     }
     /**
-     * Permet de d'interchanger deux nodes, c'est-a-dire d'interchanger
+     * Permet d'interchanger deux nodes, c'est-a-dire d'interchanger
      * le node courant avec son parent.
      *
      * @return None
@@ -129,7 +133,7 @@ public class Node implements Comparable<Node> {
     /**
      * Permet de supprimer le noeud courant de l'arbre binomial
      *
-     * @return ArrayList<Node> : arbres binomaiaux restants apres la supression du noeud
+     * @return ArrayList<Node> : arbres binomiaux restants apres la supression du noeud
      */
     public ArrayList<Node> delete() {
         // à compléter
@@ -165,22 +169,33 @@ public class Node implements Comparable<Node> {
      * @return void
      */
     private void print(String tabulation, int profondeur, boolean premierLigne){
+        //Definition du format d'affichage des nombres
+        int nombreAffichageInt = 2; //Nombre de chiffre des nombres
+        String format = "%" + nombreAffichageInt + "d";
+
+        //Definition de l'espace avant le premier nombre sur la ligne
+        String avantLigne = "";
+        for(int i = 0 ; i < tabulation.length() + nombreAffichageInt ; i++)
+            avantLigne += " ";
+
         //Ajouter une tabulation
         if(!premierLigne)
             System.out.print(tabulation);
 
         //Si le noeud est une feuille
-        if(enfants.size() == 0)
-            System.out.println(valeur);
+        if(enfants.size() == 0) {
+            System.out.printf(format, valeur);
+            System.out.println();
+        }
         else {
             //Affichage du noeud courant
-            System.out.print(valeur);
+            System.out.printf(format, valeur);
 
             for (int i = 0; i < enfants.size(); i++) {
                 //Ajouter des tabulations si l'enfant en cours n'est pas le premier
                 if (i != 0) {
                     for(int j = 0 ; j < profondeur ; j++)
-                        System.out.print("\t");
+                        System.out.print(avantLigne);
                     enfants.get(i).print(tabulation, profondeur + 1, true);
                 }
                 else
@@ -250,4 +265,19 @@ public class Node implements Comparable<Node> {
      * @return int : resultat de la comparaison
      */
     public int compareTo(Node node){ return ordre - node.ordre; }
+
+    /**
+     * Permet de cloner un node est ses enfants
+     *
+     * @return Node : resultat du clonage
+     */
+    public Node clone(){
+        Node clone = new Node(valeur);
+        clone.ordre = ordre;
+
+        for(Node element : enfants)
+            clone.addEnfant(element.clone());
+
+        return clone;
+    }
 }

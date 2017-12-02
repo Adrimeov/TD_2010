@@ -4,28 +4,22 @@ public class Main
     public static void main(String[] args)
     {
         try {
+            testNode();
             testMonceau();
         }
         catch (DifferentOrderTrees e){
             System.out.println("Erreur de fusion : ordre different");
         }
-        testNode();
-
-
     }
 
     public static void testNode()
     {
         //Creation d'un tableau de 10 nodes
         ArrayList<Node> nodes = new ArrayList<>();
-        for(int i = 5; i<15; i++) {
+        for(int i = 0; i<10; i++) {
             nodes.add(new Node(i));
         }
 
-
-       //Node fusion = nodes.get(0).fusion(nodes.get(1));
-        //
-        // System.out.println(nodes.get(1).ordre);
         try {
             Node fusion = nodes.get(0).fusion(nodes.get(1));
             Node fusion2 = nodes.get(2).fusion(nodes.get(3));
@@ -36,32 +30,31 @@ public class Main
             Node fusionB4 = fusionB.fusion(fusion2B);
 
             Node fusionA8 = fusionA4.fusion(fusionB4);
-            int a = 1;
-            //nodes.get(2).moveUp();
-            //System.out.println(fusion.ordre);
 
-//            //Affichage arbre d'ordre 2
-//            ArrayList<Integer> fusion4 = fusionA4.getElementsSorted();
-//            for(Integer entier : fusion4)
-//                System.out.print(entier + " ");
-//            System.out.println();
-
-            //Tester la methode find
-//            int aTrouve = 3;
-//            Node trouve = fusionA4.findValue(aTrouve);
-//            if(trouve != null)
-//                System.out.println("Noeud " + aTrouve + " : " + trouve.getVal());
-//            else
-//                System.out.println("Noeud " + aTrouve + " non trouve");
-
-
-            fusionA8.print("->");
             //Affichage arbre d'ordre 2
-            //ArrayList<Node> restants = trouve.delete();
-            int i = 0;
+            System.out.println("Affichage arbre ordre 2 :");
+            fusionA4.print(" -> ");
+            ArrayList<Integer> fusion4 = fusionA4.getElementsSorted();
+            System.out.println("Affichage des elements de l'arbre en ordre :");
+            for(Integer entier : fusion4)
+                System.out.print(entier + " ");
+            System.out.println();
 
+            //Tester la methode find\\
+            System.out.println("\nTeste methode find :");
+            for(int i = 0 ; i < 6 ; i++) {
+                int aTrouve = i;
+                Node trouve = fusionA4.findValue(aTrouve);
+                if (trouve != null)
+                    System.out.println("Noeud " + aTrouve + " : " + trouve.getVal());
+                else
+                    System.out.println("Noeud " + aTrouve + " : non trouve");
+            }
+
+            System.out.println("\nAffichage arbre ordre 3 :");
+            fusionA8.print(" -> ");
         }
-        catch(DifferentOrderTrees e){ System.out.println("exeption");}
+        catch(DifferentOrderTrees e){ System.out.println("exception");}
 
     }
 
@@ -78,22 +71,39 @@ public class Main
         //Test insertion dans le monceau
         int nombresElements = 15;
         for(int i = nombresElements - 1 ; i >= 0 ; i--) {
-            monceau1.insert(i);
-            monceau2.insert(2 * i);
+            monceau1.insert(2*i);
+            monceau2.insert(2*i + 1);
         }
 
 
         //Test fusion de monceaux
+        System.out.println("\nMonceau 1 :");
+        monceau1.print();
+        System.out.println("Monceau 2 :");
+        monceau2.print();
+        System.out.println("\nAffichage monceau 1 fusione avec 2 :");
         monceau1.fusion(monceau2);
+        monceau1.print();
 
 
         //Test supression
+        System.out.println("\nTeste de delete sur Monceau :");
         int aRetirer = 15;
-        System.out.println("Arbres avec l'élément " + aRetirer);
-        monceau1.print();
+        System.out.println("Monceau avec l'élément " + aRetirer);
+        monceau2.print();
 
-        monceau1.delete(aRetirer);
-        System.out.println("Arbres sans  l'élément " + aRetirer);
-        monceau1.print();
+        if(monceau2.delete(aRetirer))
+            System.out.println("L'element " + aRetirer + " a bien ete retire");
+        else
+            System.out.println("L'element " + aRetirer + " n'est pas present");
+
+        System.out.println("\nMonceau sans l'élément " + aRetirer);
+        monceau2.print();
+
+        System.out.println("\nTest de delete sur Monceau d'un nombre inexistant :");
+        if(monceau2.delete(aRetirer))
+            System.out.println("Erreur : le nombre a deja ete retire");
+        else
+            System.out.println("Le nombre " + aRetirer + " n'est pas present dans le monceau");
     }
 }

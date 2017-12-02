@@ -42,7 +42,7 @@ public class Monceau {
 
                 case 1 :
                     //On l'ajoute au monceau final
-                    monceauFusion.add(trouve.get(0));
+                    monceauFusion.add(trouve.remove(0));
                     break;
 
                 case 3 :
@@ -64,6 +64,9 @@ public class Monceau {
 
         //Remplacer l'arbre courant par celui fusionne
         arbres = monceauFusion;
+
+        //Trier les nodes avant de les afficher
+        Collections.sort(arbres);
     }
 
     /**
@@ -81,7 +84,7 @@ public class Monceau {
     }
 
     /**
-     * Permet d'insérer une valeur dans le monceau
+     * Permet de trouver un node avec un ordre precise en parametre
      *
      * @param  ordre : ordre du node a trouver
      * @return node : node avec l'ordre recherche
@@ -104,8 +107,11 @@ public class Monceau {
         // à compléter
         Node trouve = find(0);
         Node nodeTempo = new Node(val);
-        if(trouve != null) {
+        if(trouve == null) {
             this.arbres.add(nodeTempo);
+
+            //Trier les nodes
+            Collections.sort(arbres);
             return;
         }
         Monceau tempo = new Monceau();
@@ -122,9 +128,10 @@ public class Monceau {
     public boolean delete (int val)throws DifferentOrderTrees {
         // à compléter
         boolean trouver = false;
-        for(int i = 0; i<arbres.size();i++){
+        for(int i = 0 ; i < arbres.size() ; i++){
             Node nodeTrouver = arbres.get(i).findValue(val);
-            if(nodeTrouver!=null){
+            if(nodeTrouver != null){
+                arbres.remove(i);
                 ArrayList<Node> arrayTempo = nodeTrouver.delete();
                 Monceau monceauTempo = new Monceau();
                 monceauTempo.arbres.addAll(arrayTempo);
@@ -148,7 +155,9 @@ public class Monceau {
         //Trier les nodes avant de les afficher
         Collections.sort(arbres);
 
-        for(Node element : arbres)
-            element.print(" ");
+        for(Node element : arbres) {
+            System.out.println("Arbre binomial d'ordre " + element.ordre);
+            element.print(" -> ");
+        }
     }
 }
