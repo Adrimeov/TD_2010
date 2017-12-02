@@ -11,7 +11,7 @@ import java.util.Collections;
  *
  * @author maitr
  */
-public class Node {
+public class Node implements Comparable<Node> {
 
     public int ordre;
     public Node parent;
@@ -241,4 +241,13 @@ public class Node {
 
     	return liste;
     }
+
+
+    /**
+     * Permet de comparer deux node ensemble selon leur ordre
+     *
+     * @param node : node de comparaison
+     * @return int : resultat de la comparaison
+     */
+    public int compareTo(Node node){ return ordre - node.ordre; }
 }

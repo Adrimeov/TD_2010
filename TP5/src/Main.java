@@ -3,7 +3,12 @@ public class Main
 {
     public static void main(String[] args)
     {
-        testMonceau();
+        try {
+            testMonceau();
+        }
+        catch (DifferentOrderTrees e){
+            System.out.println("Erreur de fusion : ordre different");
+        }
         testNode();
 
 
@@ -61,7 +66,7 @@ public class Main
     }
 
 
-    public static void testMonceau(){
+    public static void testMonceau() throws DifferentOrderTrees {
 
         //Création de monceaux
         Monceau monceau1 = new Monceau();

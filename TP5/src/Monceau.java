@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Monceau {
     ArrayList<Node> arbres;
@@ -106,10 +107,10 @@ public class Monceau {
     }
 
     /**
-     * Permet de retrouver un noeud avec la valeur passée en paramètre
+     * Permet de supprimer un noeud avec la valeur passée en paramètre
      *
-     * @param  val : valeur du noeud à trouver
-     * @return boolean : si le monceau possède la valeur
+     * @param  val : valeur du noeud à supprimer
+     * @return boolean : si le monceau possède a ete supprimer
      */
     public boolean delete (int val) {
         // à compléter
@@ -125,5 +126,10 @@ public class Monceau {
      */
     public void print() {
         // à compléter
+        //Trier les nodes avant de les afficher
+        Collections.sort(arbres);
+
+        for(Node element : arbres)
+            element.print(" ");
     }
 }
