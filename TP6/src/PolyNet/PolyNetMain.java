@@ -10,6 +10,10 @@ public class PolyNetMain {
         if (isTest1Correct && isTest2Correct && isTest3Correct) {
             System.out.println("PolyNet : Tous les tests passent!");
         }
+
+
+
+
     }
 
     private static void connect(PolyNetNode node1, PolyNetNode node2, int distance)
